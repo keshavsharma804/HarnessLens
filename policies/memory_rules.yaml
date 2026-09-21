@@ -1,0 +1,18 @@
+version: "1.0.0"
+
+# Memory fitness policy.
+#
+# Fitness = (successful_uses - unsuccessful_uses) / total_uses.
+# Range: -1.0 (always wrong) to +1.0 (always right).
+
+fitness:
+  prune_threshold: -0.3            # Remove if fitness below this
+  min_uses_before_prune: 5         # Only prune after N uses
+  retrieval_top_k: 5               # Max lessons per retrieval
+  retrieval_min_fitness: -0.5      # Do not retrieve memories below this
+
+# Retrieval strategy.
+retrieval:
+  rank_by: ["context_overlap", "fitness"]
+  include_successes: true
+  include_failures: true

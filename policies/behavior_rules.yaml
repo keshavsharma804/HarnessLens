@@ -1,0 +1,37 @@
+# Declarative behavior rules. Evaluated at runtime BEFORE a tool executes.
+#
+# This is not prompt-based filtering. The gate is deterministic and lives
+# outside the agent's control. The agent cannot bypass it by rephrasing.
+
+version: "1.0.0"
+
+rules:
+  # Deny write operations in high-risk contexts.
+  - name: "deny-writes-on-risky-tasks"
+    action: deny
+    when:
+      tool_name: "write_file"
+      risk_level: "high"
+    reason: "High-risk tasks must not mutate the file system without review."
+
+  # Deny shell execution on production hosts.
+  - name: "deny-shell-on-prod"
+    action: deny
+    when:
+      tool_name: "run_command"
+      target_environment: "production"
+    reason: "Production shell access requires human approval."
+
+  # Flag (allow with warning) any credential read.
+  - name: "flag-credential-reads"
+    action: flag
+    when:
+      tool_name: "read_file"
+      path_glob: "**/.env"
+    reason: "Reading .env files is logged for security review."
+
+  # Allow everything else by default.
+  - name: "default-allow"
+    action: allow
+    when: {}  # matches anything
+    reason: "No deny rule matched."

@@ -1,0 +1,49 @@
+version: "1.0.0"
+
+# A harness patch is a declarative change to harness behavior.
+# It is validated against held-out runs before deployment.
+#
+# Reference: Harness-R1 (2026) — failure-conditioned, lifecycle-wide
+# editing of executable runtimes as a learned capability.
+
+patch_schema:
+  fields:
+    patch_id:
+      type: string
+      description: "Unique identifier for this patch."
+    target_harness:
+      type: string
+      description: "The harness this patch modifies."
+    rationale:
+      type: string
+      description: "Human-readable justification, grounded in evidence."
+    changes:
+      type: list
+      description: "One or more field-level changes."
+      item_schema:
+        field:
+          type: string
+          enum:
+            - system_prompt
+            - tool_permissions
+            - max_steps
+            - retry_policy
+            - context_strategy
+            - verification_policy
+        from:
+          type: any
+        to:
+          type: any
+    evidence:
+      type: list
+      description: "Trajectory digest run_ids that motivated the patch."
+      items:
+        type: string
+    expected_improvement:
+      type: string
+      description: "What the patch aims to fix."
+
+validation:
+  min_improvement: 0.05        # Required improvement over baseline to accept
+  min_held_out_runs: 3         # Minimum held-out runs for statistical validity
+  max_regression_allowed: 0.0  # No regressions tolerated on any sub-metric

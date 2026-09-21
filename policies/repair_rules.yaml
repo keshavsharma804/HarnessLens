@@ -1,0 +1,58 @@
+version: "1.0.0"
+
+# Repair rules map a failure signature prefix to ordered candidate actions.
+# The executor tries them in order and records which succeeded.
+
+repairs:
+  timeout_:
+    actions:
+      - id: "retry_with_shorter_context"
+        type: "retry_with_backoff"
+        params: {max_retries: 2, context_trim_ratio: 0.5}
+      - id: "switch_to_cheaper_harness"
+        type: "switch_harness"
+        params: {target: "easyloops"}
+      - id: "escalate_to_human"
+        type: "escalate"
+
+  silent_failure_:
+    actions:
+      - id: "rerun_with_verification"
+        type: "rerun_with_verifier"
+        params: {verifier: "predicate_decomposer"}
+      - id: "switch_to_strict_harness"
+        type: "switch_harness"
+        params: {target: "researchharness"}
+
+  loop_:
+    actions:
+      - id: "break_loop_switch_harness"
+        type: "switch_harness"
+        params: {target: "easyloops", reason: "loop_break"}
+      - id: "escalate_to_human"
+        type: "escalate"
+
+  tool_error_:
+    actions:
+      - id: "retry_tool_call"
+        type: "retry_with_backoff"
+        params: {max_retries: 3, backoff_seconds: 1.0}
+      - id: "escalate_to_human"
+        type: "escalate"
+
+  stale_context_:
+    actions:
+      - id: "refresh_context_and_retry"
+        type: "inject_context"
+        params: {refresh_sources: true}
+
+  merge_conflict_:
+    actions:
+      - id: "escalate_merge_conflict"
+        type: "escalate"
+        params: {reason: "merge_conflict_requires_human"}
+
+  _default:
+    actions:
+      - id: "escalate_unknown_failure"
+        type: "escalate"

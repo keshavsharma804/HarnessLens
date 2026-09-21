@@ -1,0 +1,85 @@
+# policies/default.yaml
+# Git-managed routing policy. Changes here are reviewable via PR.
+#
+# Design rationale: Policies are code, not dashboard settings.
+# Every routing decision references a hash of this file for audit.
+
+version: "1.0.0"
+policy_name: "default-cost-aware"
+
+# --- Global constraints (admission control gates) ---
+admission_control:
+  max_cost_per_run_cents: 500.0      # Hard ceiling: abort if exceeded
+  budget_warning_threshold: 0.8        # Warn at 80% consumption
+  max_loop_steps: 40                   # Per harness/agent-loop standards [citation:8]
+  min_confidence_score: 0.7
+
+# --- Routing rules (evaluated in order; first match wins) ---
+routing_rules:
+  # Rule 1: Early loops → use the capable but expensive harness.
+  # Rationale: Early steps set the trajectory; quality matters most here.
+  - name: "early-stage-precision"
+    condition:
+      loop_step: "< 5"
+    action:
+      prefer_harnesses: ["researchharness"]
+      fallback_harnesses: ["easyloops"]
+      reason: "Early trajectory steps benefit from stronger harness."
+
+  # Rule 2: Mid-loop with a known tool → use the cheap harness.
+  # Rationale: Routine tool calls (e.g., file read) don't need expensive reasoning.
+  - name: "mid-loop-routine-tool"
+    condition:
+      loop_step: ">= 5"
+      last_tool_called: "read_file"   # Only applies to specific tools
+    action:
+      prefer_harnesses: ["easyloops"]
+      fallback_harnesses: ["researchharness"]
+      reason: "Routine file reads are cost-sensitive."
+
+  # Rule 3: High budget consumption → force cheapest viable harness.
+  # Rationale: Prevent runaway cost. This is RUNTIME enforcement, not post-hoc.
+  - name: "budget-pressure"
+    condition:
+      budget_consumed_ratio: "> 0.8"
+    action:
+      prefer_harnesses: ["easyloops"]
+      fallback_harnesses: []
+      allow_degradation: true   # Phase 3: switch mid-run if needed
+      reason: "Budget pressure: degrade to cheapest harness."
+
+# --- Harness registry (metadata for scoring) ---
+harnesses:
+  researchharness:
+    display_name: "ResearchHarness"
+    cost_per_1k_tokens_cents: 1.5
+    typical_latency_ms: 800
+    strengths: ["precision", "long-horizon"]
+    weaknesses: ["cost"]
+  easyloops:
+    display_name: "EasyLoops"
+    cost_per_1k_tokens_cents: 0.2
+    typical_latency_ms: 300
+    strengths: ["cost", "speed", "deterministic"]
+    weaknesses: ["precision"]
+
+# --- Scoring weights (Phase 2) ---
+# The router computes a composite score for each candidate harness.
+# Score = w_historical * historical_success
+#       + w_cost * cost_score
+#       + w_latency * latency_score
+#       + w_step_affinity * step_affinity
+scoring:
+  weights:
+    historical_success: 0.30
+    cost: 0.20
+    latency: 0.10
+    step_affinity: 0.40
+
+  normalization:
+    max_cost_cents: 10.0
+    max_latency_ms: 2000
+
+  step_affinity:
+    early_phase_max_step: 5
+    late_phase_min_step: 8

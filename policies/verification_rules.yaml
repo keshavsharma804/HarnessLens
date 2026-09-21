@@ -1,0 +1,29 @@
+version: "1.0.0"
+
+verification_rules:
+  code_modification:
+    predicates:
+      - name: "target_file_exists"
+        type: "artifact_exists"
+        params: {path: "src/main.py"}
+        description: "The file the agent claimed to modify must exist."
+      - name: "no_error_in_final"
+        type: "no_error_in_final"
+        description: "The final event must not carry an error."
+      - name: "cost_within_budget"
+        type: "cost_within_budget"
+        params: {max_cents: 100.0}
+    formula:
+      operator: "and"
+      operands: ["target_file_exists", "no_error_in_final", "cost_within_budget"]
+
+  data_analysis:
+    predicates:
+      - name: "output_exists"
+        type: "artifact_exists"
+        params: {path: "output.json"}
+      - name: "no_error_in_final"
+        type: "no_error_in_final"
+    formula:
+      operator: "and"
+      operands: ["output_exists", "no_error_in_final"]

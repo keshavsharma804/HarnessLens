@@ -1,0 +1,13 @@
+{
+  "fixture": "dict_key_error",
+  "strategy": "routed",
+  "model": "gpt-5-nano",
+  "run_id": 0,
+  "passed": false,
+  "cost_cents": 0.133281,
+  "input_tokens": 41309,
+  "output_tokens": 1898,
+  "duration_seconds": 53.12061643600464,
+  "patch_length": 0,
+  "error": null
+}

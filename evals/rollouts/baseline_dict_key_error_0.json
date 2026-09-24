@@ -1,0 +1,13 @@
+{
+  "fixture": "dict_key_error",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 0,
+  "passed": true,
+  "cost_cents": 4.6031249999999995,
+  "input_tokens": 58449,
+  "output_tokens": 2913,
+  "duration_seconds": 57.11419701576233,
+  "patch_length": 294,
+  "error": null
+}

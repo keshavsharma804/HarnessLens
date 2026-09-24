@@ -1,0 +1,13 @@
+{
+  "fixture": "swap_values",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 6,
+  "passed": true,
+  "cost_cents": 4.860924999999999,
+  "input_tokens": 75897,
+  "output_tokens": 2905,
+  "duration_seconds": 63.94224286079407,
+  "patch_length": 235,
+  "error": null
+}

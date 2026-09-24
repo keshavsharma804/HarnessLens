@@ -1,0 +1,283 @@
+{
+  "strategies": [
+    "baseline",
+    "routed"
+  ],
+  "fixtures_count": 10,
+  "results": {
+    "baseline": {
+      "passes": 10,
+      "total": 10,
+      "cost_cents": 51.896625,
+      "raw": [
+        {
+          "fixture": "dict_key_error",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 0,
+          "passed": true,
+          "cost_cents": 4.6031249999999995,
+          "input_tokens": 58449,
+          "output_tokens": 2913,
+          "duration_seconds": 57.11419701576233,
+          "patch_length": 294,
+          "error": null
+        },
+        {
+          "fixture": "list_append",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 1,
+          "passed": true,
+          "cost_cents": 7.032925,
+          "input_tokens": 119881,
+          "output_tokens": 4259,
+          "duration_seconds": 220.05346131324768,
+          "patch_length": 318,
+          "error": null
+        },
+        {
+          "fixture": "loop_infinite",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 2,
+          "passed": true,
+          "cost_cents": 4.144275,
+          "input_tokens": 55831,
+          "output_tokens": 2479,
+          "duration_seconds": 50.07363033294678,
+          "patch_length": 274,
+          "error": null
+        },
+        {
+          "fixture": "missing_return",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 3,
+          "passed": true,
+          "cost_cents": 7.864925,
+          "input_tokens": 133489,
+          "output_tokens": 3750,
+          "duration_seconds": 73.54431343078613,
+          "patch_length": 373,
+          "error": null
+        },
+        {
+          "fixture": "off_by_one",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 4,
+          "passed": true,
+          "cost_cents": 5.307475,
+          "input_tokens": 67279,
+          "output_tokens": 3464,
+          "duration_seconds": 74.95212864875793,
+          "patch_length": 317,
+          "error": null
+        },
+        {
+          "fixture": "string_concat",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 5,
+          "passed": true,
+          "cost_cents": 5.982325000000001,
+          "input_tokens": 125689,
+          "output_tokens": 3332,
+          "duration_seconds": 112.65689253807068,
+          "patch_length": 259,
+          "error": null
+        },
+        {
+          "fixture": "swap_values",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 6,
+          "passed": true,
+          "cost_cents": 4.860924999999999,
+          "input_tokens": 75897,
+          "output_tokens": 2905,
+          "duration_seconds": 63.94224286079407,
+          "patch_length": 235,
+          "error": null
+        },
+        {
+          "fixture": "wrong_condition",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 7,
+          "passed": true,
+          "cost_cents": 3.8442250000000002,
+          "input_tokens": 56581,
+          "output_tokens": 2330,
+          "duration_seconds": 51.160622119903564,
+          "patch_length": 244,
+          "error": null
+        },
+        {
+          "fixture": "wrong_operator",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 8,
+          "passed": true,
+          "cost_cents": 2.541225,
+          "input_tokens": 45661,
+          "output_tokens": 1168,
+          "duration_seconds": 23.572755813598633,
+          "patch_length": 234,
+          "error": null
+        },
+        {
+          "fixture": "wrong_slice",
+          "strategy": "baseline",
+          "model": "gpt-5",
+          "run_id": 9,
+          "passed": true,
+          "cost_cents": 5.715199999999999,
+          "input_tokens": 123704,
+          "output_tokens": 3025,
+          "duration_seconds": 276.9459185600281,
+          "patch_length": 262,
+          "error": null
+        }
+      ]
+    },
+    "routed": {
+      "passes": 9,
+      "total": 10,
+      "cost_cents": 2.441303,
+      "raw": [
+        {
+          "fixture": "dict_key_error",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 0,
+          "passed": false,
+          "cost_cents": 0.133281,
+          "input_tokens": 41309,
+          "output_tokens": 1898,
+          "duration_seconds": 53.12061643600464,
+          "patch_length": 0,
+          "error": null
+        },
+        {
+          "fixture": "list_append",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 1,
+          "passed": true,
+          "cost_cents": 0.627992,
+          "input_tokens": 187368,
+          "output_tokens": 11906,
+          "duration_seconds": 107.34575247764587,
+          "patch_length": 348,
+          "error": null
+        },
+        {
+          "fixture": "loop_infinite",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 2,
+          "passed": true,
+          "cost_cents": 0.188604,
+          "input_tokens": 58772,
+          "output_tokens": 2999,
+          "duration_seconds": 33.79990863800049,
+          "patch_length": 344,
+          "error": null
+        },
+        {
+          "fixture": "missing_return",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 3,
+          "passed": true,
+          "cost_cents": 0.37094399999999994,
+          "input_tokens": 81864,
+          "output_tokens": 6111,
+          "duration_seconds": 66.11546969413757,
+          "patch_length": 262,
+          "error": null
+        },
+        {
+          "fixture": "off_by_one",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 4,
+          "passed": true,
+          "cost_cents": 0.181171,
+          "input_tokens": 59207,
+          "output_tokens": 2802,
+          "duration_seconds": 37.47686696052551,
+          "patch_length": 317,
+          "error": null
+        },
+        {
+          "fixture": "string_concat",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 5,
+          "passed": true,
+          "cost_cents": 0.16459599999999996,
+          "input_tokens": 65716,
+          "output_tokens": 2294,
+          "duration_seconds": 32.31628441810608,
+          "patch_length": 259,
+          "error": null
+        },
+        {
+          "fixture": "swap_values",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 6,
+          "passed": true,
+          "cost_cents": 0.16211599999999998,
+          "input_tokens": 41260,
+          "output_tokens": 2625,
+          "duration_seconds": 36.017595052719116,
+          "patch_length": 235,
+          "error": null
+        },
+        {
+          "fixture": "wrong_condition",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 7,
+          "passed": true,
+          "cost_cents": 0.19401100000000002,
+          "input_tokens": 42823,
+          "output_tokens": 2651,
+          "duration_seconds": 29.532106399536133,
+          "patch_length": 244,
+          "error": null
+        },
+        {
+          "fixture": "wrong_operator",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 8,
+          "passed": true,
+          "cost_cents": 0.19194099999999997,
+          "input_tokens": 40497,
+          "output_tokens": 2458,
+          "duration_seconds": 29.471282958984375,
+          "patch_length": 234,
+          "error": null
+        },
+        {
+          "fixture": "wrong_slice",
+          "strategy": "routed",
+          "model": "gpt-5-nano",
+          "run_id": 9,
+          "passed": true,
+          "cost_cents": 0.22664699999999996,
+          "input_tokens": 41667,
+          "output_tokens": 3309,
+          "duration_seconds": 38.7075400352478,
+          "patch_length": 262,
+          "error": null
+        }
+      ]
+    }
+  }
+}

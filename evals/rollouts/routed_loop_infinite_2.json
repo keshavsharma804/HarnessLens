@@ -1,0 +1,13 @@
+{
+  "fixture": "loop_infinite",
+  "strategy": "routed",
+  "model": "gpt-5-nano",
+  "run_id": 2,
+  "passed": true,
+  "cost_cents": 0.188604,
+  "input_tokens": 58772,
+  "output_tokens": 2999,
+  "duration_seconds": 33.79990863800049,
+  "patch_length": 344,
+  "error": null
+}

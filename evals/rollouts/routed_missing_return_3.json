@@ -1,0 +1,13 @@
+{
+  "fixture": "missing_return",
+  "strategy": "routed",
+  "model": "gpt-5-nano",
+  "run_id": 3,
+  "passed": true,
+  "cost_cents": 0.37094399999999994,
+  "input_tokens": 81864,
+  "output_tokens": 6111,
+  "duration_seconds": 66.11546969413757,
+  "patch_length": 262,
+  "error": null
+}

@@ -1,0 +1,13 @@
+{
+  "fixture": "string_concat",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 5,
+  "passed": true,
+  "cost_cents": 5.982325000000001,
+  "input_tokens": 125689,
+  "output_tokens": 3332,
+  "duration_seconds": 112.65689253807068,
+  "patch_length": 259,
+  "error": null
+}

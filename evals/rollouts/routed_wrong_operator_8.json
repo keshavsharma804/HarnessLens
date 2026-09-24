@@ -1,0 +1,13 @@
+{
+  "fixture": "wrong_operator",
+  "strategy": "routed",
+  "model": "gpt-5-nano",
+  "run_id": 8,
+  "passed": true,
+  "cost_cents": 0.19194099999999997,
+  "input_tokens": 40497,
+  "output_tokens": 2458,
+  "duration_seconds": 29.471282958984375,
+  "patch_length": 234,
+  "error": null
+}

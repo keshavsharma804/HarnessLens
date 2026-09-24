@@ -1,0 +1,13 @@
+{
+  "fixture": "off_by_one",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 4,
+  "passed": true,
+  "cost_cents": 5.307475,
+  "input_tokens": 67279,
+  "output_tokens": 3464,
+  "duration_seconds": 74.95212864875793,
+  "patch_length": 317,
+  "error": null
+}

@@ -1,0 +1,13 @@
+{
+  "fixture": "missing_return",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 3,
+  "passed": true,
+  "cost_cents": 7.864925,
+  "input_tokens": 133489,
+  "output_tokens": 3750,
+  "duration_seconds": 73.54431343078613,
+  "patch_length": 373,
+  "error": null
+}

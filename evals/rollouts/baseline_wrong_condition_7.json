@@ -1,0 +1,13 @@
+{
+  "fixture": "wrong_condition",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 7,
+  "passed": true,
+  "cost_cents": 3.8442250000000002,
+  "input_tokens": 56581,
+  "output_tokens": 2330,
+  "duration_seconds": 51.160622119903564,
+  "patch_length": 244,
+  "error": null
+}

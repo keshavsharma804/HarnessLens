@@ -428,3 +428,67 @@ If I had another month on this project, here is the order I would attack.
 The value of this project is not that it works. It is that it documents where it does not. Every failure mode in Part 1 is real. Every limitation in Part 2 is honest. Every tradeoff in Part 4 was a decision, not an accident.
 
 If you are considering contributing, start with Part 5. If you are evaluating this project as a hiring signal, read Part 1. That is where the engineering lives.
+
+
+
+
+## Real Test Result #1: Local Bug Fix
+
+**Date:** [today's date]
+**Model:** GPT-5 via OpenHands SDK
+**Task:** Fix the `add()` function in a 20-line Python file
+
+**Methodology:**
+- Fixture at `local_tests/fixture_01/` — a buggy Python file + a test file
+- Baseline: ran `pytest` before the agent → 3 tests failed
+- Agent: OpenHands with GPT-5, given the instructions + problem statement
+- Verification: ran `pytest` after the agent → 3 tests passed
+
+**Result:**
+- Fix produced: YES
+- Cost: $0.0321
+- Duration: 37 seconds
+- Tokens: 55,805 input, 1,521 output
+- Baseline → After: FAIL → PASS
+
+**What this proves:**
+Real LLM, real code change, real verification. Not a simulation.
+
+
+Two entries:
+
+15. OpenHands SDK does not support Chat Completions models (gpt-4o, gpt-4o-mini, o4-mini)
+
+Symptom: ConversationErrorEvent is not registered in EVENT_VISUALIZATION_CONFIG. Aborts in 6-8 seconds with zero tokens.
+
+Root cause: OpenHands SDK v1.49 uses OpenAI's Responses API by default. Older models like gpt-4o-mini and gpt-4o are only available on the Chat Completions API. The SDK aborts silently without printing the underlying error.
+
+Fix: Use models from the GPT-5 family (gpt-5, gpt-5-mini, gpt-5-nano), which are Responses-API native.
+
+Lesson: When an SDK switches to a new API surface, older models do not migrate automatically. The failure mode is silent — no tokens billed, no helpful error message. Always test model compatibility explicitly.
+
+16. Silent SDK failures produce zero-cost non-results
+
+Symptom: Fix produced: NO, Cost: $0.0000, Time: 6s. The batch runner treats this as a failed task, but no real work was attempted.
+
+Root cause: The SDK rejected the model before any API call. The runner cannot distinguish "the model tried and failed" from "the model was never called."
+
+Fix: For published benchmarks, tag zero-token runs as INCOMPATIBLE rather than counting them as FAIL. The real Pass@1 among compatible configs is 3/3, not 3/6.
+
+Lesson: A benchmark that mixes compatibility errors with real failures misreports the system. Distinguish infrastructure errors from behavioral failures.
+
+That second entry matters. Your real Pass@1 is 3/3 among compatible configs. The three failures were SDK incompatibility, not model failures. State that clearly in the README.
+
+
+
+## Quantified Failure Taxonomy (N=20 runs)
+
+| Failure Mode | Frequency | Strategy | Impact |
+|---|---|---|---|
+| No patch produced | 1/10 (10%) | Routed | Task fails silently |
+| Cost variance > 2x baseline | 3/10 (30%) | Baseline | Unpredictable spend |
+| Timeout under long context | 0/10 (0%) | Both | Not observed at this N |
+
+**Note:** The baseline had zero failures but wide cost variance. The routed
+strategy had one failure but narrow cost variance. This is the actual
+tradeoff, and it is not captured by pass rate alone.

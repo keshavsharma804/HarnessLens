@@ -1,0 +1,28 @@
+{
+  "model": "gpt-4o-mini",
+  "start_index": 30,
+  "count": 1,
+  "started_at": "2026-09-21T20:03:20.856859+00:00",
+  "tasks": [
+    {
+      "index": 30,
+      "instance_id": "django__django-12125",
+      "repo": "django/django",
+      "cost_cents": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "patch_produced": false,
+      "patch_length": 0,
+      "prediction_file": null,
+      "duration_seconds": 44.579572439193726
+    }
+  ],
+  "totals": {
+    "cost_cents": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "patches_produced": 0,
+    "total_seconds": 44.579572439193726
+  },
+  "finished_at": "2026-09-21T20:04:05.459097+00:00"
+}

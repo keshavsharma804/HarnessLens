@@ -1,0 +1,13 @@
+{
+  "fixture": "loop_infinite",
+  "strategy": "baseline",
+  "model": "gpt-5",
+  "run_id": 2,
+  "passed": true,
+  "cost_cents": 4.144275,
+  "input_tokens": 55831,
+  "output_tokens": 2479,
+  "duration_seconds": 50.07363033294678,
+  "patch_length": 274,
+  "error": null
+}

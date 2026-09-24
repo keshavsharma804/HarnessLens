@@ -1,0 +1,13 @@
+{
+  "fixture": "off_by_one",
+  "strategy": "routed",
+  "model": "gpt-5-nano",
+  "run_id": 4,
+  "passed": true,
+  "cost_cents": 0.181171,
+  "input_tokens": 59207,
+  "output_tokens": 2802,
+  "duration_seconds": 37.47686696052551,
+  "patch_length": 317,
+  "error": null
+}
